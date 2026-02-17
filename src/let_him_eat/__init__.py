@@ -1,5 +1,4 @@
 import pygame
-import Andrea
 
 def main() -> None:
     
@@ -22,11 +21,12 @@ def main() -> None:
     Titlefont = pygame.font.SysFont('Bebas Neue', 70)
     Normalfont = pygame.font.SysFont('Impact', 30)
     game_start = Titlefont.render("Benvenuto in Let Him Eat!", True, "black")
-    close_tip = Normalfont.render("Aiuta garfield a mangiare le sue amate lasagne", True, "blue","yellow")
+    subtitle = Normalfont.render("Aiuta garfield a mangiare le sue amate lasagne", True, "black")
+    commands = Normalfont.render("Ricordarsi di aggiungere i comandi :)", True, "blue" )
     
    #pulsante
     font = pygame.font.SysFont('Comic Sans MS',40) 
-    textSurface = font.render('Esci' , True , "white") 
+    textSurface = font.render('EXIT' , True , "white") 
     buttonRect = pygame.Rect(SCREEN_WIDTH // 2 -480, SCREEN_HEIGHT // 2 +200, 200, 60)
 
 
@@ -35,7 +35,8 @@ def main() -> None:
         screen.blit(imgSfondo,(0,0))
         
         screen.blit(game_start, (270,150))
-        screen.blit(close_tip, (270,210))
+        screen.blit(subtitle, (270,210))
+        screen.blit(commands, (270,260))
         
         mPos = pygame.mouse.get_pos()
         
@@ -109,4 +110,4 @@ if __name__ == "__main__":
 #             y += speed  
         
 #         screen.blit(game_end, (100,100))
-#         screen.blit(close_tip, (100,300))
+#         screen.blit(subtitle, (100,300))
