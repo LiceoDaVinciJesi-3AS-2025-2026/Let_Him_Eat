@@ -25,8 +25,9 @@ def main() -> None:
     game_start = Titlefont.render("Benvenuto in Let Him Eat!", True, "dark red")
     subtitle = Subtitlefont.render("Aiuta garfield a mangiare le sue amate lasagne", True, "dark red")
     commands = Normalfont.render("Ricordarsi di aggiungere i comandi:)", True, "blue" )
-    start_text = Normalfont.render("Premi ENTER per iniziare", True, "dark gray")
-    
+    start_text = Normalfont.render("Benvenuto nel gioco! Prima di premere Invio e iniziare l’avventura lascia che ti sveli le regole fondamentali per affrontare la sfida al meglio!", True, "dark gray")
+
+   
    #pulsante
     font = pygame.font.SysFont('Comic Sans MS',40) 
     textSurface = font.render('EXIT' , True , "white") 
@@ -36,9 +37,9 @@ def main() -> None:
     playerX = 400
     playerY = 300
     player_speed = 5
-    player_size = 50
+    player_size = 80
     
-    imgGarfield = pygame.image.load("garfield.png")
+    imgGarfield = pygame.image.load("garfield_senza_sfondo.png")
     imgGarfield = pygame.transform.scale(imgGarfield,(player_size, player_size))
    
    #interazioni
