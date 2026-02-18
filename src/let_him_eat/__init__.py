@@ -15,9 +15,6 @@ def main() -> None:
     imgSfondo = pygame.image.load("schermataHome.jpg") 
     imgSfondo = pygame.transform.scale(imgSfondo,(SCREEN_WIDTH,SCREEN_HEIGHT))
     
-    imgGarfield = pygame.image.load("garfield.png")
-    
-    
     x = SCREEN_WIDTH // 2
     y = SCREEN_HEIGHT // 2
     
@@ -40,6 +37,9 @@ def main() -> None:
     playerY = 300
     player_speed = 5
     player_size = 50
+    
+    imgGarfield = pygame.image.load("garfield.png")
+    imgGarfield = pygame.transform.scale(imgGarfield,(player_size, player_size))
    
    #interazioni
     running = True
@@ -90,7 +90,7 @@ def main() -> None:
             playerX, playerY = move_player(keys, playerX, playerY, player_speed, SCREEN_WIDTH, SCREEN_HEIGHT, player_size)
         
             screen.fill("white")  
-            pygame.draw.rect(screen, "blue", (playerX, playerY, player_size, player_size))
+            screen.blit(imgGarfield, (playerX, playerY))
 
         
         pygame.display.flip()
