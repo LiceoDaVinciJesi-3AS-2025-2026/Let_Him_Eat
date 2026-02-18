@@ -11,25 +11,29 @@ def main() -> None:
     screen = pygame.display.set_mode( (SCREEN_WIDTH, SCREEN_HEIGHT) )
     pygame.display.set_caption("Let Him Eat")
     
-    #sfondo
+    #immagini
     imgSfondo = pygame.image.load("schermataHome.jpg") 
     imgSfondo = pygame.transform.scale(imgSfondo,(SCREEN_WIDTH,SCREEN_HEIGHT))
+    
+    imgGarfield = pygame.image.load("garfield.png")
+    
     
     x = SCREEN_WIDTH // 2
     y = SCREEN_HEIGHT // 2
     
    #scritte
-    Titlefont = pygame.font.SysFont('Bebas Neue', 70)
-    Normalfont = pygame.font.SysFont('Impact', 30)
-    game_start = Titlefont.render("Benvenuto in Let Him Eat!", True, "black")
-    subtitle = Normalfont.render("Aiuta garfield a mangiare le sue amate lasagne", True, "black")
-    commands = Normalfont.render("Ricordarsi di aggiungere i comandi :)", True, "blue" )
-    start_text = Normalfont.render("Premi ENTER per iniziare", True, "green")
+    Titlefont = pygame.font.SysFont('Impact', 70)
+    Subtitlefont = pygame.font.SysFont('Impact', 30)
+    Normalfont = pygame.font.SysFont('Serif', 30)
+    game_start = Titlefont.render("Benvenuto in Let Him Eat!", True, "dark red")
+    subtitle = Subtitlefont.render("Aiuta garfield a mangiare le sue amate lasagne", True, "dark red")
+    commands = Normalfont.render("Ricordarsi di aggiungere i comandi:)", True, "blue" )
+    start_text = Normalfont.render("Premi ENTER per iniziare", True, "dark gray")
     
    #pulsante
     font = pygame.font.SysFont('Comic Sans MS',40) 
     textSurface = font.render('EXIT' , True , "white") 
-    buttonRect = pygame.Rect(SCREEN_WIDTH // 2 -480, SCREEN_HEIGHT // 2 +200, 200, 60)
+    buttonRect = pygame.Rect(SCREEN_WIDTH -300, SCREEN_HEIGHT -100, 200, 60)
    
    #posizione iniziale del player
     playerX = 400
@@ -65,14 +69,14 @@ def main() -> None:
         # se ci troviamo nella schermata iniziale
         if home:
             screen.blit(imgSfondo,(0,0))
-            screen.blit(game_start, (270,150))
-            screen.blit(subtitle, (270,210))
-            screen.blit(commands, (270,260))
-            screen.blit(start_text, (270, 310))
+            screen.blit(game_start, (80,50))
+            screen.blit(subtitle, (80,125))
+            screen.blit(commands, (80,170))
+            screen.blit(start_text, (80, 200))
         
             mPos = pygame.mouse.get_pos()
         
-            buttonColor = "black"
+            buttonColor = "dark red"
             if buttonRect.collidepoint(mPos):
                 buttonColor = "red"
         
