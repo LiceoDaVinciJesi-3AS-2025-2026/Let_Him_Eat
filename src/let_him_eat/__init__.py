@@ -11,44 +11,40 @@ def main() -> None:
     screen = pygame.display.set_mode( (SCREEN_WIDTH, SCREEN_HEIGHT) )
     pygame.display.set_caption("Let Him Eat")
     
-    #immagini
+    # Immagini
     imgSfondo = pygame.image.load("schermataHome.jpg") 
-    imgSfondo = pygame.transform.scale(imgSfondo,(SCREEN_WIDTH,SCREEN_HEIGHT))
-    
-    x = SCREEN_WIDTH // 2
-    y = SCREEN_HEIGHT // 2
+    imgSfondo = pygame.transform.scale(imgSfondo,(SCREEN_WIDTH, SCREEN_HEIGHT))
     
     imgRegole = pygame.image.load("pergamenaConRegole.png") 
     imgRegole = pygame.transform.scale(imgRegole,(SCREEN_WIDTH // 2.5, SCREEN_HEIGHT // 1.40))
     
-    x = SCREEN_WIDTH 
-    y = SCREEN_HEIGHT 
+    imgLabrinto = pygame.image.load("eastward_pacman_marble_v2.png")
+    imgLabrinto = pygame.transform.scale(imgLabrinto, (SCREEN_WIDTH, SCREEN_HEIGHT))
     
-   #scritte
+   # Scritte
     Titlefont = pygame.font.SysFont('Impact', 70)
     Subtitlefont = pygame.font.SysFont('Impact', 30)
     Normalfont = pygame.font.SysFont('Serif', 30)
     game_start = Titlefont.render("Benvenuto in Let Him Eat!", True, "dark red")
     subtitle = Subtitlefont.render("Aiuta garfield a mangiare le sue amate lasagne", True, "dark red")
-#     commands = Normalfont.render("Ricordarsi di aggiungere i comandi:)", True, "blue" )
-#     start_text = Normalfont.render("Benvenuto nel gioco! Prima di premere Invio e iniziare l’avventura lascia che ti sveli le regole fondamentali per affrontare la sfida al meglio!", True, "dark gray")
 
    
-   #pulsante
+   # Pulsante
     font = pygame.font.SysFont('Comic Sans MS',40) 
     textSurface = font.render('EXIT' , True , "white") 
     buttonRect = pygame.Rect(SCREEN_WIDTH -300, SCREEN_HEIGHT -100, 200, 60)
    
-   #posizione iniziale del player
+   # Posizione iniziale del player
     playerX = 400
     playerY = 300
     player_speed = 5
-    player_size = 50
+    player_size = 45
     
+    # Immagine Garfiel (ovvero il personaggio da muovere)
     imgGarfield = pygame.image.load("garfield_senza_sfondo.png")
     imgGarfield = pygame.transform.scale(imgGarfield,(player_size, player_size))
    
-   #interazioni
+   # Interazioni
     running = True
     home = True 
     
@@ -79,8 +75,6 @@ def main() -> None:
             screen.blit(imgRegole,(90,170))
             screen.blit(game_start, (80,50))
             screen.blit(subtitle, (80,125))
-#             screen.blit(commands, (80,170))
-#             screen.blit(start_text, (80, 200))
         
             mPos = pygame.mouse.get_pos()
         
@@ -97,7 +91,7 @@ def main() -> None:
             keys = pygame.key.get_pressed()
             playerX, playerY = move_player(keys, playerX, playerY, player_speed, SCREEN_WIDTH, SCREEN_HEIGHT, player_size)
         
-            screen.fill("white")  
+            screen.blit(imgLabrinto,(0,0)) 
             screen.blit(imgGarfield, (playerX, playerY))
 
         
