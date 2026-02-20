@@ -91,8 +91,10 @@ def main() -> None:
             keys = pygame.key.get_pressed()
             playerX, playerY = move_player(keys, playerX, playerY, player_speed, SCREEN_WIDTH, SCREEN_HEIGHT, player_size)
         
-            screen.blit(imgLabrinto,(0,0)) 
+            screen.blit(imgLabrinto,(0,0))
             screen.blit(imgGarfield, (playerX, playerY))
+            
+            print(pygame.mouse.get_pos())
 
         
         pygame.display.flip()
