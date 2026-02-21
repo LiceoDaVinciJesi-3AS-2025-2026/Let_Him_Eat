@@ -27,8 +27,7 @@ def main() -> None:
     Normalfont = pygame.font.SysFont('Serif', 30)
     game_start = Titlefont.render("Benvenuto in Let Him Eat!", True, "dark red")
     subtitle = Subtitlefont.render("Aiuta garfield a mangiare le sue amate lasagne", True, "dark red")
-
-   
+  
    # Pulsante
     font = pygame.font.SysFont('Comic Sans MS',40) 
     textSurface = font.render('EXIT' , True , "white") 
