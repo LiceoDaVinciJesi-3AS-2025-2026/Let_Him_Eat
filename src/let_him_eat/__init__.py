@@ -1,5 +1,6 @@
 import pygame
 from Paolo import move_player
+import random
 
 def main() -> None:
     
@@ -21,6 +22,9 @@ def main() -> None:
     imgLabrinto = pygame.image.load("eastward_pacman_marble_v2.png")
     imgLabrinto = pygame.transform.scale(imgLabrinto, (SCREEN_WIDTH, SCREEN_HEIGHT))
     
+    imgLasagna = pygame.image.load("lasagna_pixel.jpg")
+    imgLasagna = pygame.transform.scale(imgLasagna, (30, 30))
+    
    # Scritte
     Titlefont = pygame.font.SysFont('Impact', 70)
     Subtitlefont = pygame.font.SysFont('Impact', 30)
@@ -32,8 +36,16 @@ def main() -> None:
     font = pygame.font.SysFont('Comic Sans MS',40) 
     textSurface = font.render('EXIT' , True , "white") 
     buttonRect = pygame.Rect(SCREEN_WIDTH -300, SCREEN_HEIGHT -100, 200, 60)
-   
-   # Posizione iniziale del player
+
+   # Enità
+    lasagna = [
+        (410, 435),
+    
+    ]
+    
+    mangiati = 0
+    
+    # Valori iniziali del player
     playerX = 400
     playerY = 300
     player_speed = 5
@@ -89,9 +101,26 @@ def main() -> None:
         else:
             keys = pygame.key.get_pressed()
             playerX, playerY = move_player(keys, playerX, playerY, player_speed, SCREEN_WIDTH, SCREEN_HEIGHT, player_size)
-        
+            
             screen.blit(imgLabrinto,(0,0))
             screen.blit(imgGarfield, (playerX, playerY))
+            # Punteggio testo
+            score_text = Normalfont.render(f"Punteggio: {mangiati}", True, "white")
+            screen.blit(score_text, (50, 200))
+            
+            # Interazione con le lasagne
+            lasagna_rimaste = []
+            for posx, posy in lasagna:
+                en = pygame.Rect(posx, posy, 30, 30)
+                screen.blit(imgLasagna, (posx, posy))
+    
+                player_rect = pygame.Rect(playerX, playerY, player_size, player_size)
+                if player_rect.colliderect(en):
+                    mangiati += 1
+                else:
+                    lasagna_rimaste.append((posx, posy))
+
+            lasagna = lasagna_rimaste
             
             print(pygame.mouse.get_pos())
 
