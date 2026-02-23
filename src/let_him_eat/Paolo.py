@@ -33,6 +33,18 @@ WALLS = [
     pygame.Rect(652, 210, 130, 35),
     pygame.Rect(704, 173, 38, 35),
     pygame.Rect(755, 295, 38, 35),
+    pygame.Rect(705, 42, 31, 76),
+    pygame.Rect(807, 83, 130, 76),
+    pygame.Rect(1005, 42, 31, 76),
+    pygame.Rect(1105, 83, 79, 76),
+    pygame.Rect(1257, 83, 79, 76),
+    pygame.Rect(857, 213, 29, 115),
+    pygame.Rect(902, 295, 38, 35),
+    pygame.Rect(955, 213, 130, 35),
+    pygame.Rect(1005, 173, 38, 35),
+    pygame.Rect(857, 380, 176, 35),
+    pygame.Rect(1005, 296, 31, 76),
+    pygame.Rect(1105, 296, 31, 76),
     
     # Settore 3
     pygame.Rect(56, 336, 130, 200),
