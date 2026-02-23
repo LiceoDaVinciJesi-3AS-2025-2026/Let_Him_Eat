@@ -22,8 +22,8 @@ def main() -> None:
     imgLabrinto = pygame.image.load("eastward_pacman_marble_v2.png")
     imgLabrinto = pygame.transform.scale(imgLabrinto, (SCREEN_WIDTH, SCREEN_HEIGHT))
     
-    imgLasagna = pygame.image.load("lasagna_pixel.jpg")
-    imgLasagna = pygame.transform.scale(imgLasagna, (30, 30))
+    imgLasagna = pygame.image.load("lasagna_pixel.png")
+    imgLasagna = pygame.transform.scale(imgLasagna, (30, 20))
     
    # Scritte
     Titlefont = pygame.font.SysFont('Impact', 70)

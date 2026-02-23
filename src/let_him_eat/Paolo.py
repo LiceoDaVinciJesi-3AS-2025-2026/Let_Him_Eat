@@ -38,7 +38,7 @@ WALLS = [
     pygame.Rect(1005, 42, 31, 76),
     pygame.Rect(1105, 83, 79, 76),
     pygame.Rect(1257, 83, 79, 76),
-    pygame.Rect(857, 213, 29, 115),
+    pygame.Rect(857, 213, 31, 115),
     pygame.Rect(902, 295, 38, 35),
     pygame.Rect(955, 213, 130, 35),
     pygame.Rect(1005, 173, 38, 35),
@@ -48,7 +48,14 @@ WALLS = [
     
     # Settore 3
     pygame.Rect(56, 336, 130, 200),
-    pygame.Rect(102, 591, 79, 76)
+    pygame.Rect(102, 591, 79, 76),
+    pygame.Rect(110, 594, 79, 76),
+    pygame.Rect(260, 549, 130, 31),
+    pygame.Rect(356, 465, 29, 117),
+    pygame.Rect(251, 548, 40, 119),
+    pygame.Rect(260, 382, 31, 115),
+    pygame.Rect(452, 464, 20, 117),
+    pygame.Rect(450, 463, 130, 60), #DA VEDERE LE GRANDEZZE CENA TIME ;(
     
     ]
 
