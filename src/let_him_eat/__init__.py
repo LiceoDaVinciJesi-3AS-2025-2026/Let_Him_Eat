@@ -27,13 +27,14 @@ def main() -> None:
     Subtitlefont = pygame.font.SysFont('Impact', 30)
     Normalfont = pygame.font.SysFont('Serif', 30)
 
-   # Pulsante
-    font = pygame.font.SysFont('Comic Sans MS',40) 
+   # Pulsanti
+    font = pygame.font.SysFont('Comic Sans MS',40)
+    # Pulsante 1
     textSurface = font.render('EXIT' , True , "white") 
-    buttonRect = pygame.Rect(SCREEN_WIDTH -1500, SCREEN_HEIGHT -300, 200, 60)
-    
+    buttonRect = pygame.Rect(SCREEN_WIDTH -1200, SCREEN_HEIGHT -300, 200, 60)
+    # Pulsante 2
     textSurface2 = font.render('RULES' , True , "white") 
-    buttonRect2 = pygame.Rect(SCREEN_WIDTH -1500, SCREEN_HEIGHT -400, 200, 60)
+    buttonRect2 = pygame.Rect(SCREEN_WIDTH -1200, SCREEN_HEIGHT -400, 200, 60)
 
    # Enità
     lasagna = [
@@ -167,8 +168,6 @@ def main() -> None:
         if home:
             screen.blit(imgSfondo,(0,0))
             
- 
-        
             mPos = pygame.mouse.get_pos()
         
             buttonColor = "dark red"

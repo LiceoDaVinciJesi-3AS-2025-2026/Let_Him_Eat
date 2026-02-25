@@ -42,9 +42,18 @@ WALLS = [
     pygame.Rect(902, 295, 38, 35),
     pygame.Rect(955, 213, 130, 35),
     pygame.Rect(1005, 173, 38, 35),
-    pygame.Rect(857, 380, 176, 33),
+    pygame.Rect(857, 380, 180, 33),
     pygame.Rect(1005, 296, 31, 76),
     pygame.Rect(1105, 296, 31, 117),
+    pygame.Rect(1155, 212, 31, 115),
+    pygame.Rect(1257, 212, 79, 76),
+    pygame.Rect(1355, 340, 27, 31),
+    pygame.Rect(1355, 421, 27, 31),
+    pygame.Rect(1355, 505, 27, 31),
+    pygame.Rect(1259, 340, 27, 195),
+    pygame.Rect(1207, 380, 27, 31),
+    pygame.Rect(1207, 466, 27, 31),
+    
     
     # Settore 3
     pygame.Rect(56, 336, 130, 200),
@@ -64,13 +73,19 @@ WALLS = [
     pygame.Rect(560, 584, 27, 79),
     pygame.Rect(710, 672, 27, 79),
     pygame.Rect(660, 632, 130, 31),
-    pygame.Rect(1155, 212, 31, 115),
-    pygame.Rect(1257, 212, 79, 76),
-    pygame.Rect(1355, 340, 27, 31),
-    pygame.Rect(1355, 421, 27, 31),
-    pygame.Rect(1355, 505, 27, 31),
-    pygame.Rect(1259, 340, 27, 195),
-    pygame.Rect(1207, 380, 27, 31),
+    
+    
+    # Settore 4
+    pygame.Rect(657, 380, 130, 118),
+    pygame.Rect(757, 550, 29, 31),
+    pygame.Rect(857, 465, 180, 31),
+    pygame.Rect(1005, 502, 31, 79),
+    pygame.Rect(857, 547, 81, 31),
+    pygame.Rect(857, 588, 31, 75),
+    pygame.Rect(807, 715, 130, 31),
+    pygame.Rect(955, 632, 132, 31),
+    pygame.Rect(1005, 673, 31, 79),
+    
     ]
 
 # =========================================================================================================================================
@@ -99,7 +114,7 @@ def move_player(keys, x, y, speed, screen_width, screen_height, player_size):
     if keys[pygame.K_a] and x > 0:
         newX -= speed
     if keys[pygame.K_d] and x < screen_width - player_size:
-        newX -= speed
+        newX += speed
     
     if check_collision(pygame.Rect(newX, y, player_size, player_size)):
         newX = x
