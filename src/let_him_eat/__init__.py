@@ -129,8 +129,8 @@ def main() -> None:
     mangiati = 0
     
     # Valori iniziali del player
-    playerX = 400
-    playerY = 300
+    playerX = 55
+    playerY = 38
     player_speed = 5
     player_size = 45
     
@@ -181,18 +181,14 @@ def main() -> None:
             screen.blit(textSurface, textRect)
         
         # se ci troviamo nel gioco
-        else:
+        elif home == False :
             keys = pygame.key.get_pressed()
             playerX, playerY = move_player(keys, playerX, playerY, player_speed, SCREEN_WIDTH, SCREEN_HEIGHT, player_size)
             
             screen.blit(imgLabrinto,(0,0))
             screen.blit(imgGarfield, (playerX, playerY))
-            # Punteggio testo
-            score_text = Normalfont.render(f"Punteggio: {mangiati}", True, "white")
-            r = pygame.draw.rect(screen, "black", (10, 10, 170, 40))
-            screen.blit(score_text, (10, 10))
-            
-            
+        
+                      
             # Interazione con le lasagne
             lasagna_rimaste = []
             for posx, posy in lasagna:
