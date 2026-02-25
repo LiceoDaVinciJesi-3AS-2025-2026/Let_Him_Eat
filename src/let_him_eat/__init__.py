@@ -13,12 +13,9 @@ def main() -> None:
     pygame.display.set_caption("Let Him Eat")
     
     # Immagini
-    imgSfondo = pygame.image.load("sfondofigo.png") 
+    imgSfondo = pygame.image.load("schermataHome.png") 
     imgSfondo = pygame.transform.scale(imgSfondo,(SCREEN_WIDTH, SCREEN_HEIGHT))
-    
-#     imgRegole = pygame.image.load("pergamenaConRegole.png") 
-#     imgRegole = pygame.transform.scale(imgRegole,(SCREEN_WIDTH // 2.5, SCREEN_HEIGHT // 1.40))
-    
+     
     imgLabrinto = pygame.image.load("eastward_pacman_marble_v2.png")
     imgLabrinto = pygame.transform.scale(imgLabrinto, (SCREEN_WIDTH, SCREEN_HEIGHT))
     
@@ -29,13 +26,14 @@ def main() -> None:
     Titlefont = pygame.font.SysFont('Impact', 70)
     Subtitlefont = pygame.font.SysFont('Impact', 30)
     Normalfont = pygame.font.SysFont('Serif', 30)
-    game_start = Titlefont.render("Benvenuto in Let Him Eat!", True, "dark red")
-    subtitle = Subtitlefont.render("Aiuta garfield a mangiare le sue amate lasagne", True, "dark red")
-  
+
    # Pulsante
     font = pygame.font.SysFont('Comic Sans MS',40) 
     textSurface = font.render('EXIT' , True , "white") 
-    buttonRect = pygame.Rect(SCREEN_WIDTH -300, SCREEN_HEIGHT -100, 200, 60)
+    buttonRect = pygame.Rect(SCREEN_WIDTH -1500, SCREEN_HEIGHT -300, 200, 60)
+    
+    textSurface2 = font.render('RULES' , True , "white") 
+    buttonRect2 = pygame.Rect(SCREEN_WIDTH -1500, SCREEN_HEIGHT -400, 200, 60)
 
    # Enità
     lasagna = [
@@ -138,6 +136,8 @@ def main() -> None:
     imgGarfield = pygame.image.load("garfield_senza_sfondo.png")
     imgGarfield = pygame.transform.scale(imgGarfield,(player_size, player_size))
    
+    imgGarfieldAvanti = pygame.image.load("garfieldAvanti.png")
+    imgGarfieldAvanti = pygame.transform.scale(imgGarfield,(player_size, player_size))
    # Interazioni
     running = True
     home = True 
@@ -166,19 +166,26 @@ def main() -> None:
         # se ci troviamo nella schermata iniziale
         if home:
             screen.blit(imgSfondo,(0,0))
-            #screen.blit(imgRegole,(90,170))
-            screen.blit(game_start, (80,50))
-            screen.blit(subtitle, (80,125))
+            
+ 
         
             mPos = pygame.mouse.get_pos()
         
             buttonColor = "dark red"
             if buttonRect.collidepoint(mPos):
                 buttonColor = "red"
-        
+            
             button = pygame.draw.rect(screen,buttonColor,buttonRect)
             textRect = textSurface.get_rect(center=buttonRect.center)
             screen.blit(textSurface, textRect)
+            
+            buttonColor2 = "darkred"
+            if buttonRect2.collidepoint(mPos):
+                buttonColor2 = "red"
+                
+            button2 = pygame.draw.rect(screen,buttonColor2,buttonRect2)
+            textRect2 = textSurface2.get_rect(center=buttonRect2.center)
+            screen.blit(textSurface2, textRect2)
         
         # se ci troviamo nel gioco
         elif home == False :
@@ -187,7 +194,7 @@ def main() -> None:
             
             screen.blit(imgLabrinto,(0,0))
             screen.blit(imgGarfield, (playerX, playerY))
-        
+            
                       
             # Interazione con le lasagne
             lasagna_rimaste = []

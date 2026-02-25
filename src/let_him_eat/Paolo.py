@@ -87,6 +87,7 @@ def check_collision(player_rect):
 
 # =========================================================================================================================================
 
+
 # Funzione movimento giocatore
 def move_player(keys, x, y, speed, screen_width, screen_height, player_size):
     """
@@ -98,7 +99,7 @@ def move_player(keys, x, y, speed, screen_width, screen_height, player_size):
     if keys[pygame.K_a] and x > 0:
         newX -= speed
     if keys[pygame.K_d] and x < screen_width - player_size:
-        newX += speed
+        newX -= speed
     
     if check_collision(pygame.Rect(newX, y, player_size, player_size)):
         newX = x
@@ -111,6 +112,7 @@ def move_player(keys, x, y, speed, screen_width, screen_height, player_size):
         newY -= speed
     if keys[pygame.K_s] and y < screen_height - player_size:
         newY += speed
+    
     if check_collision(pygame.Rect(x, newY, player_size, player_size)):
         newY = y
     
