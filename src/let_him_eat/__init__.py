@@ -13,11 +13,11 @@ def main() -> None:
     pygame.display.set_caption("Let Him Eat")
     
     # Immagini
-    imgSfondo = pygame.image.load("schermataHome.jpg") 
+    imgSfondo = pygame.image.load("sfondofigo.png") 
     imgSfondo = pygame.transform.scale(imgSfondo,(SCREEN_WIDTH, SCREEN_HEIGHT))
     
-    imgRegole = pygame.image.load("pergamenaConRegole.png") 
-    imgRegole = pygame.transform.scale(imgRegole,(SCREEN_WIDTH // 2.5, SCREEN_HEIGHT // 1.40))
+#     imgRegole = pygame.image.load("pergamenaConRegole.png") 
+#     imgRegole = pygame.transform.scale(imgRegole,(SCREEN_WIDTH // 2.5, SCREEN_HEIGHT // 1.40))
     
     imgLabrinto = pygame.image.load("eastward_pacman_marble_v2.png")
     imgLabrinto = pygame.transform.scale(imgLabrinto, (SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -166,7 +166,7 @@ def main() -> None:
         # se ci troviamo nella schermata iniziale
         if home:
             screen.blit(imgSfondo,(0,0))
-            screen.blit(imgRegole,(90,170))
+            #screen.blit(imgRegole,(90,170))
             screen.blit(game_start, (80,50))
             screen.blit(subtitle, (80,125))
         
