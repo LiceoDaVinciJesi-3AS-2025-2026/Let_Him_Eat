@@ -48,8 +48,7 @@ WALLS = [
     
     # Settore 3
     pygame.Rect(56, 336, 130, 200),
-    pygame.Rect(105, 591, 79, 76),
-    pygame.Rect(110, 594, 79, 76),
+    pygame.Rect(107, 590, 79, 76),
     pygame.Rect(260, 549, 122, 31),
     pygame.Rect(356, 465, 31, 110),
     pygame.Rect(255, 548, 35, 115),
