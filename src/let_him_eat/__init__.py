@@ -20,7 +20,7 @@ def main() -> None:
     imgLabrinto = pygame.transform.scale(imgLabrinto, (SCREEN_WIDTH, SCREEN_HEIGHT))
     
     imgLasagna = pygame.image.load("lasagna_pixel.png")
-    imgLasagna = pygame.transform.scale(imgLasagna, (30, 20))
+    imgLasagna = pygame.transform.scale(imgLasagna, (30, 30))
     
    # Scritte
     Titlefont = pygame.font.SysFont('Impact', 70)
