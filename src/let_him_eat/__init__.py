@@ -22,6 +22,9 @@ def main() -> None:
     imgLasagna = pygame.image.load("lasagna_pixel.png")
     imgLasagna = pygame.transform.scale(imgLasagna, (30, 30))
     
+    imgCaffè = pygame.image.load("caffe.png")
+    imgCaffè = pygame.transform.scale(imgCaffè, (30, 30))
+    
    # Scritte
     Titlefont = pygame.font.SysFont('Impact', 70)
     Subtitlefont = pygame.font.SysFont('Impact', 30)
@@ -125,13 +128,31 @@ def main() -> None:
         
     ]
     
-    mangiati = 0
+    posizioni_caffe = [
+        (60, 555),
+        (1358, 555),
+        (410, 132),
+        (1010, 132),
+        (712, 307),
+    ]
+    
+    caffè = []
+    
+    LasagneMangiate = 0
+    CaffèBevuti = 0
     
     # Valori iniziali del player
     playerX = 55
     playerY = 38
-    player_speed = 5
     player_size = 45
+    
+    velocita_normale = 4
+    velocita_boost = 8
+
+    player_speed = velocita_normale
+
+    boost_attivo = False
+    fine_boost = 0
     
     # Immagine Garfiel (ovvero il personaggio da muovere)
     imgGarfield = pygame.image.load("garfield_senza_sfondo.png")
@@ -151,6 +172,9 @@ def main() -> None:
     
     clock = pygame.time.Clock()
     
+    ADD_CAFFE = pygame.USEREVENT + 1
+    pygame.time.set_timer(ADD_CAFFE, 5000)  # 10 secondi
+    
     while running:
         
         mPos = pygame.mouse.get_pos()
@@ -165,6 +189,11 @@ def main() -> None:
                 
                 if home and event.key == pygame.K_RETURN:
                     home = False 
+        
+        if event.type == ADD_CAFFE and not home:
+            if len(caffè) == 0:
+                posizione = random.choice(posizioni_caffe)
+                caffè.append(posizione)
         
         if event.type == pygame.MOUSEBUTTONDOWN: 
             if buttonRect.collidepoint(mPos):
@@ -201,15 +230,21 @@ def main() -> None:
             playerX, playerY, direction = move_player(keys, playerX, playerY, player_speed, SCREEN_WIDTH, SCREEN_HEIGHT, player_size)
             if direction == "dx":
                 screen.blit(imgGarfieldDestra, (playerX, playerY))
+            
             elif direction == "sx":
                 screen.blit(imgGarfieldSinistra, (playerX, playerY))
             
             elif direction == "up":
                 screen.blit(imgGarfieldSopra, (playerX, playerY))
+            
             else:
                 screen.blit(imgGarfield, (playerX, playerY))
             
-                      
+            # Controllo fine boost
+            if boost_attivo and pygame.time.get_ticks() > fine_boost:
+                player_speed = velocita_normale
+                boost_attivo = False          
+            
             # Interazione con le lasagne
             lasagna_rimaste = []
             for posx, posy in lasagna:
@@ -218,11 +253,29 @@ def main() -> None:
     
                 player_rect = pygame.Rect(playerX, playerY, player_size, player_size)
                 if player_rect.colliderect(en):
-                    mangiati += 1
+                    LasagneMangiate += 1
                 else:
                     lasagna_rimaste.append((posx, posy))
 
             lasagna = lasagna_rimaste
+            
+            # Interazione con il caffè
+            caffè_rimasti = []
+            for posx, posy in caffè:
+                en2 = pygame.Rect(posx, posy, 30, 30)
+                screen.blit(imgCaffè, (posx, posy))
+                
+                player_rect = pygame.Rect(playerX, playerY, player_size, player_size)
+                if player_rect.colliderect(en2):
+                    CaffèBevuti += 1
+                    # Attiva boost
+                    player_speed = velocita_boost
+                    boost_attivo = True
+                    fine_boost = pygame.time.get_ticks() + 3000  # 3 secondi
+                else:
+                    caffè_rimasti.append((posx, posy))
+                
+            caffè = caffè_rimasti
             
             print(pygame.mouse.get_pos())
 
