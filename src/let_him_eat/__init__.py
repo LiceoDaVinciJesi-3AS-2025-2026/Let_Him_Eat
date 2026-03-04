@@ -22,6 +22,9 @@ def main() -> None:
     imgLasagna = pygame.image.load("lasagna_pixel.png")
     imgLasagna = pygame.transform.scale(imgLasagna, (30, 30))
     
+    imgGarfieldDestra = pygame.image.load("garfieldAvanti.png")
+    imgGarfieldDestra = pygame.transform.scale(imgGarfieldDestra, (30, 30))
+    
    # Scritte
     Titlefont = pygame.font.SysFont('Impact', 70)
     Subtitlefont = pygame.font.SysFont('Impact', 30)
@@ -189,10 +192,12 @@ def main() -> None:
         # se ci troviamo nel gioco
         elif home == False :
             keys = pygame.key.get_pressed()
-            playerX, playerY = move_player(keys, playerX, playerY, player_speed, SCREEN_WIDTH, SCREEN_HEIGHT, player_size)
-            
+
             screen.blit(imgLabrinto,(0,0))
-            screen.blit(imgGarfield, (playerX, playerY))
+            
+            playerX, playerY, direction = move_player(keys, playerX, playerY, player_speed, SCREEN_WIDTH, SCREEN_HEIGHT, player_size)
+            if direction == "dx":
+                screen.blit(imgGarfield, (playerX, playerY))
             
                       
             # Interazione con le lasagne
