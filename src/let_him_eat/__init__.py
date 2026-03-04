@@ -22,9 +22,6 @@ def main() -> None:
     imgLasagna = pygame.image.load("lasagna_pixel.png")
     imgLasagna = pygame.transform.scale(imgLasagna, (30, 30))
     
-    imgGarfieldDestra = pygame.image.load("garfieldAvanti.png")
-    imgGarfieldDestra = pygame.transform.scale(imgGarfieldDestra, (30, 30))
-    
    # Scritte
     Titlefont = pygame.font.SysFont('Impact', 70)
     Subtitlefont = pygame.font.SysFont('Impact', 30)
@@ -140,8 +137,14 @@ def main() -> None:
     imgGarfield = pygame.image.load("garfield_senza_sfondo.png")
     imgGarfield = pygame.transform.scale(imgGarfield,(player_size, player_size))
    
-    imgGarfieldAvanti = pygame.image.load("garfieldAvanti.png")
-    imgGarfieldAvanti = pygame.transform.scale(imgGarfield,(player_size, player_size))
+    imgGarfieldDestra = pygame.image.load("garfieldAvanti.png")
+    imgGarfieldDestra = pygame.transform.scale(imgGarfieldDestra,(player_size + 2, player_size + 2))
+    
+    imgGarfieldSinistra = pygame.image.load("garfieldsinistra.png")
+    imgGarfieldSinistra = pygame.transform.scale(imgGarfieldSinistra,(player_size + 2, player_size + 2))
+    
+    imgGarfieldSopra = pygame.image.load("garfieldsopra.png")
+    imgGarfieldSopra = pygame.transform.scale(imgGarfieldSopra,(player_size +4, player_size + 4))
    # Interazioni
     running = True
     home = True 
@@ -197,6 +200,13 @@ def main() -> None:
             
             playerX, playerY, direction = move_player(keys, playerX, playerY, player_speed, SCREEN_WIDTH, SCREEN_HEIGHT, player_size)
             if direction == "dx":
+                screen.blit(imgGarfieldDestra, (playerX, playerY))
+            elif direction == "sx":
+                screen.blit(imgGarfieldSinistra, (playerX, playerY))
+            
+            elif direction == "up":
+                screen.blit(imgGarfieldSopra, (playerX, playerY))
+            else:
                 screen.blit(imgGarfield, (playerX, playerY))
             
                       

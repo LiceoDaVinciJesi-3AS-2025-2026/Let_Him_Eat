@@ -114,13 +114,16 @@ def move_player(keys, x, y, speed, screen_width, screen_height, player_size):
     Fa muovere il giocatore, controlla anche che il movimento non si scontri con un muro
     
     """
-    # Movimento X
+   
+    direction = None
+   # Movimento X
     newX = x
     if keys[pygame.K_a] and x > 0:
         newX -= speed
+        direction = "sx"
     if keys[pygame.K_d] and x < screen_width - player_size:
         newX += speed
-        diretion = "dx"
+        direction = "dx"
     
     if check_collision(pygame.Rect(newX, y, player_size, player_size)):
         newX = x
@@ -131,6 +134,7 @@ def move_player(keys, x, y, speed, screen_width, screen_height, player_size):
     newY = y
     if keys[pygame.K_w] and y > 0:
         newY -= speed
+        direction = "up"
     if keys[pygame.K_s] and y < screen_height - player_size:
         newY += speed
     
@@ -139,7 +143,7 @@ def move_player(keys, x, y, speed, screen_width, screen_height, player_size):
     
     y = newY
         
-    return x, y, "dx"
+    return x, y, direction
 
 # =========================================================================================================================================
 
