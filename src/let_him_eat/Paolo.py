@@ -148,3 +148,40 @@ def move_player(keys, x, y, speed, screen_width, screen_height, player_size):
 
 # =========================================================================================================================================
 
+
+# Funzione movimento nemici
+def move_enemy(enemy_x, enemy_y, player_x, player_y, speed, enemy_size):
+    dx = player_x - enemy_x
+    dy = player_y - enemy_y
+    distanza = max(1, (dx**2 + dy**2) ** 0.5)  # distanza euclidea reale
+
+    # Normalizza con distanza euclidea invece di manhattan
+    move_x = (dx / distanza) * speed
+    move_y = (dy / distanza) * speed
+
+    new_x = enemy_x + move_x
+    new_y = enemy_y + move_y
+
+    if not check_collision(pygame.Rect(int(new_x), int(new_y), enemy_size, enemy_size)):
+        return new_x, new_y
+
+    new_x_only = enemy_x + move_x
+    if not check_collision(pygame.Rect(int(new_x_only), int(enemy_y), enemy_size, enemy_size)):
+        return new_x_only, enemy_y
+
+    new_y_only = enemy_y + move_y
+    if not check_collision(pygame.Rect(int(enemy_x), int(new_y_only), enemy_size, enemy_size)):
+        return enemy_x, new_y_only
+
+    if abs(dx) > abs(dy):
+        for tentativo_y in [speed, -speed]:
+            ny = enemy_y + tentativo_y
+            if not check_collision(pygame.Rect(int(enemy_x), int(ny), enemy_size, enemy_size)):
+                return enemy_x, ny
+    else:
+        for tentativo_x in [speed, -speed]:
+            nx = enemy_x + tentativo_x
+            if not check_collision(pygame.Rect(int(nx), int(enemy_y), enemy_size, enemy_size)):
+                return nx, enemy_y
+
+    return enemy_x, enemy_y

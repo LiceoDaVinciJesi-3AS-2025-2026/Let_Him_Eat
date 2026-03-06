@@ -1,5 +1,5 @@
 import pygame
-from Paolo import move_player
+from Paolo import move_player, move_enemy
 import random
 
 def main() -> None:
@@ -11,6 +11,27 @@ def main() -> None:
     
     screen = pygame.display.set_mode( (SCREEN_WIDTH, SCREEN_HEIGHT) )
     pygame.display.set_caption("Let Him Eat")
+    
+    # Valori iniziali del giocatore
+    playerX = 55
+    playerY = 38
+    player_size = 45
+    
+    velocita_normale = 4
+    velocita_boost = 8
+
+    player_speed = velocita_normale
+
+    boost_attivo = False
+    fine_boost = 0
+    
+    # Valori iniziali del nemico
+    enemy_x = 1350.0
+    enemy_y = 700.0
+    enemy_size = 40
+    enemy_speed = 4  # Lo si può alzare per renderlo più difficile
+
+    game_over = False
     
     # Immagini
     imgSfondo = pygame.image.load("schermataHome.png") 
@@ -27,6 +48,26 @@ def main() -> None:
     
     imgRegole = pygame.image.load("regole.jpeg")
     imgRegole = pygame.transform.scale(imgRegole, (SCREEN_WIDTH, SCREEN_HEIGHT))
+    
+    # Immagine Garfiel (ovvero il personaggio da muovere)
+    imgGarfield = pygame.image.load("garfield_senza_sfondo.png")
+    imgGarfield = pygame.transform.scale(imgGarfield,(player_size, player_size))
+   
+    imgGarfieldDestra = pygame.image.load("garfieldAvanti.png")
+    imgGarfieldDestra = pygame.transform.scale(imgGarfieldDestra,(player_size + 2, player_size + 2))
+    
+    imgGarfieldSinistra = pygame.image.load("garfieldsinistra.png")
+    imgGarfieldSinistra = pygame.transform.scale(imgGarfieldSinistra,(player_size + 2, player_size + 2))
+    
+    imgGarfieldSopra = pygame.image.load("garfieldsopra.png")
+    imgGarfieldSopra = pygame.transform.scale(imgGarfieldSopra,(player_size +4, player_size + 4))
+  
+    imgGarfieldSotto = pygame.image.load("garfieldSotto.png")
+    imgGarfieldSotto = pygame.transform.scale(imgGarfieldSotto,(player_size +4, player_size + 4))
+    
+    # Immagine nemico
+    imgNemico = pygame.image.load("cane1.png")
+    imgNemico = pygame.transform.scale(imgNemico, (enemy_size, enemy_size))
     
    # Scritte
     Titlefont = pygame.font.SysFont('Impact', 70)
@@ -144,35 +185,9 @@ def main() -> None:
     LasagneMangiate = 0
     CaffèBevuti = 0
     
-    # Valori iniziali del player
-    playerX = 55
-    playerY = 38
-    player_size = 45
-    
-    velocita_normale = 4
-    velocita_boost = 8
-
-    player_speed = velocita_normale
-
-    boost_attivo = False
-    fine_boost = 0
-    
-    # Immagine Garfiel (ovvero il personaggio da muovere)
-    imgGarfield = pygame.image.load("garfield_senza_sfondo.png")
-    imgGarfield = pygame.transform.scale(imgGarfield,(player_size, player_size))
-   
-    imgGarfieldDestra = pygame.image.load("garfieldAvanti.png")
-    imgGarfieldDestra = pygame.transform.scale(imgGarfieldDestra,(player_size + 2, player_size + 2))
-    
-    imgGarfieldSinistra = pygame.image.load("garfieldsinistra.png")
-    imgGarfieldSinistra = pygame.transform.scale(imgGarfieldSinistra,(player_size + 2, player_size + 2))
-    
-    imgGarfieldSopra = pygame.image.load("garfieldsopra.png")
-    imgGarfieldSopra = pygame.transform.scale(imgGarfieldSopra,(player_size +4, player_size + 4))
-  
-    imgGarfieldSotto = pygame.image.load("garfieldSotto.png")
-    imgGarfieldSotto = pygame.transform.scale(imgGarfieldSotto,(player_size +4, player_size + 4))
-  
+    # Salva le liste originali per il reset (ovvero quando nel gioco muori)
+    lasagna_originale = lasagna.copy()
+    caffè_originale = caffè.copy()
   
   # Interazioni
     running = True
@@ -201,7 +216,17 @@ def main() -> None:
                     show_image = False
                 
                 if home and event.key == pygame.K_RETURN:
-                    home = False 
+                    home = False
+                
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_r and game_over:
+                    playerX, playerY = 55, 38
+                    enemy_x, enemy_y = 1350.0, 700.0
+                    game_over = False
+                    lasagna = lasagna_originale.copy()
+                    caffè = caffè_originale.copy()
+                    LasagneMangiate = 0
+                    CaffèBevuti = 0
         
         if event.type == ADD_CAFFE and not home:
             if len(caffè) == 0:
@@ -214,8 +239,9 @@ def main() -> None:
                 
             
             if buttonRect2.collidepoint(mPos):
-                show_image = True    
-            
+                show_image = True
+        
+        
                 
                 
         # se ci troviamo nella schermata iniziale
@@ -252,22 +278,47 @@ def main() -> None:
 
             screen.blit(imgLabrinto,(0,0))
             
-            playerX, playerY, direction = move_player(keys, playerX, playerY, player_speed, SCREEN_WIDTH, SCREEN_HEIGHT, player_size)
-            if direction == "dx":
-                screen.blit(imgGarfieldDestra, (playerX, playerY))
-            
-            elif direction == "sx":
-                screen.blit(imgGarfieldSinistra, (playerX, playerY))
-            
-            elif direction == "up":
-                screen.blit(imgGarfieldSopra, (playerX, playerY))
-            
-            elif direction == "down":
-                screen.blit(imgGarfieldSotto, (playerX, playerY))
+            # Controlla se il gioco è finito o no
+            if not game_over:
+                enemy_x, enemy_y = move_enemy(enemy_x, enemy_y, playerX, playerY, enemy_speed, enemy_size)
+                screen.blit(imgNemico, (enemy_x, enemy_y))
                 
-            else:
-                screen.blit(imgGarfield, (playerX, playerY))
-            
+                # Movimento player
+                playerX, playerY, direction = move_player(keys, playerX, playerY, player_speed, SCREEN_WIDTH, SCREEN_HEIGHT, player_size)
+                if direction == "dx":
+                    screen.blit(imgGarfieldDestra, (playerX, playerY))
+                
+                elif direction == "sx":
+                    screen.blit(imgGarfieldSinistra, (playerX, playerY))
+                
+                elif direction == "up":
+                    screen.blit(imgGarfieldSopra, (playerX, playerY))
+                
+                elif direction == "down":
+                    screen.blit(imgGarfieldSotto, (playerX, playerY))
+                    
+                else:
+                    screen.blit(imgGarfield, (playerX, playerY))
+
+                # Controllo collisione nemico-player
+                player_rect = pygame.Rect(playerX, playerY, player_size, player_size)
+                enemy_rect = pygame.Rect(enemy_x, enemy_y, enemy_size, enemy_size)
+                if player_rect.colliderect(enemy_rect):
+                    game_over = True
+
+            # Schermata Game Over
+            if game_over:
+                overlay = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SRCALPHA)
+                overlay.fill((0, 0, 0, 150))
+                screen.blit(overlay, (0, 0))
+                go_font = pygame.font.SysFont('Impact', 100)
+                go_text = go_font.render("GAME OVER", True, "red")
+                go_rect = go_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
+                screen.blit(go_text, go_rect)
+                restart_font = pygame.font.SysFont('Impact', 40)
+                restart_text = restart_font.render("Premi R per ricominciare", True, "white")
+                restart_rect = restart_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 100))
+                screen.blit(restart_text, restart_rect)
             
             # Controllo fine boost
             if boost_attivo and pygame.time.get_ticks() > fine_boost:
