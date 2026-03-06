@@ -137,6 +137,7 @@ def move_player(keys, x, y, speed, screen_width, screen_height, player_size):
         direction = "up"
     if keys[pygame.K_s] and y < screen_height - player_size:
         newY += speed
+        direction = "down"
     
     if check_collision(pygame.Rect(x, newY, player_size, player_size)):
         newY = y

@@ -25,6 +25,9 @@ def main() -> None:
     imgCaffè = pygame.image.load("caffe.png")
     imgCaffè = pygame.transform.scale(imgCaffè, (30, 30))
     
+    imgRegole = pygame.image.load("regole.jpeg")
+    imgRegole = pygame.transform.scale(imgRegole, (SCREEN_WIDTH, SCREEN_HEIGHT))
+    
    # Scritte
     Titlefont = pygame.font.SysFont('Impact', 70)
     Subtitlefont = pygame.font.SysFont('Impact', 30)
@@ -166,9 +169,15 @@ def main() -> None:
     
     imgGarfieldSopra = pygame.image.load("garfieldsopra.png")
     imgGarfieldSopra = pygame.transform.scale(imgGarfieldSopra,(player_size +4, player_size + 4))
-   # Interazioni
+  
+    imgGarfieldSotto = pygame.image.load("garfieldSotto.png")
+    imgGarfieldSotto = pygame.transform.scale(imgGarfieldSotto,(player_size +4, player_size + 4))
+  
+  
+  # Interazioni
     running = True
     home = True 
+    show_image = False
     
     clock = pygame.time.Clock()
     
@@ -186,6 +195,10 @@ def main() -> None:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     running = False
+            
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    show_image = False
                 
                 if home and event.key == pygame.K_RETURN:
                     home = False 
@@ -198,7 +211,13 @@ def main() -> None:
         if event.type == pygame.MOUSEBUTTONDOWN: 
             if buttonRect.collidepoint(mPos):
                 running = False
-        
+                
+            
+            if buttonRect2.collidepoint(mPos):
+                show_image = True    
+            
+                
+                
         # se ci troviamo nella schermata iniziale
         if home:
             screen.blit(imgSfondo,(0,0))
@@ -220,6 +239,12 @@ def main() -> None:
             button2 = pygame.draw.rect(screen,buttonColor2,buttonRect2)
             textRect2 = textSurface2.get_rect(center=buttonRect2.center)
             screen.blit(textSurface2, textRect2)
+            
+            if show_image:
+                if show_image:
+                    rectRegole = imgRegole.get_rect(center=(SCREEN_WIDTH//2, SCREEN_HEIGHT//2))
+                    screen.blit(imgRegole, rectRegole)
+            
         
         # se ci troviamo nel gioco
         elif home == False :
@@ -237,8 +262,12 @@ def main() -> None:
             elif direction == "up":
                 screen.blit(imgGarfieldSopra, (playerX, playerY))
             
+            elif direction == "down":
+                screen.blit(imgGarfieldSotto, (playerX, playerY))
+                
             else:
                 screen.blit(imgGarfield, (playerX, playerY))
+            
             
             # Controllo fine boost
             if boost_attivo and pygame.time.get_ticks() > fine_boost:
