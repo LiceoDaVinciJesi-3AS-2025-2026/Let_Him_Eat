@@ -6,6 +6,15 @@ def main() -> None:
     
     pygame.init()
     
+    
+    #musica
+    pygame.mixer.init() 
+    pygame.mixer.music.load("musicahome.mp3") 
+    pygame.mixer.music.set_volume(0.5)
+    pygame.mixer.music.play()
+
+
+    
     SCREEN_WIDTH = 1450
     SCREEN_HEIGHT = 800
     
@@ -217,6 +226,12 @@ def main() -> None:
                 
                 if home and event.key == pygame.K_RETURN:
                     home = False
+                    pygame.mixer.init() 
+                    pygame.mixer.music.load("sal.mp3") 
+                    pygame.mixer.music.set_volume(0.5)
+                    pygame.mixer.music.play()
+
+
                 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_r and game_over:
