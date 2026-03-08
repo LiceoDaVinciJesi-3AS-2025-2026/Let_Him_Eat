@@ -43,6 +43,17 @@ def main() -> None:
 
     game_over = False
     
+    # RECORD (caricato da file)
+    RECORD_FILE = "record.txt"
+    try:
+        with open(RECORD_FILE, "r") as f:
+            dati = f.read().split(",")
+            record_lasagne = int(dati[0])
+            record_caffe = int(dati[1])
+    except:
+        record_lasagne = 0
+        record_caffe = 0
+    
     # Immagini
     imgSfondo = pygame.image.load("schermataHome.png") 
     imgSfondo = pygame.transform.scale(imgSfondo,(SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -98,87 +109,87 @@ def main() -> None:
         (210, 430),
         (310, 430),
         (410, 430),
-#         (510, 430),
-#         (610, 430),
-#         (210, 515),
-#         (310, 515),
-#         (410, 515),
-#         (510, 515),
-#         (610, 515),
-#         (710, 515),
-#         (110, 55.5),
-#         (210, 55.5),
-#         (310, 55.5),
-#         (510, 55.5),
-#         (610, 55.5),
-#         (810, 55.5),
-#         (910, 55.5),
-#         (1110, 55.5),
-#         (1210, 55.5),
-#         (1310, 55.5),
-#         (110, 180),
-#         (210, 180),
-#         (310, 180),
-#         (510, 180),
-#         (610, 180),
-#         (810, 180),
-#         (910, 180),
-#         (1110, 180),
-#         (1210, 180),
-#         (1310, 180),
-#         (210, 265),
-#         (310, 265),
-#         (410, 265),
-#         (510, 265),
-#         (610, 265),
-#         (710, 265),
-#         (810, 265),
-#         (910, 265),
-#         (1010, 265),
-#         (1110, 265),
-#         (1210, 265),
-#         (210, 345),
-#         (310, 345),
-#         (410, 345),
-#         (510, 345),
-#         (610, 345),
-#         (710, 345),
-#         (810, 345),
-#         (910, 345),
-#         (1210, 345),
-#         (1310, 345),
-#         (810, 515),
-#         (910, 515),
-#         (1210, 515),
-#         (1310, 515),
-#         (810, 430),
-#         (910, 430),
-#         (1010, 430),
-#         (1110, 430),
-#         (1210, 430),
-#         (1310, 430),
-#         (210, 600),
-#         (310, 600),
-#         (410, 600),
-#         (510, 600),
-#         (610, 600),
-#         (710, 600),
-#         (810, 600),
-#         (910, 600),
-#         (1010, 600),
-#         (1110, 600),
-#         (1210, 600),
-#         (110, 685),
-#         (210, 685),
-#         (310, 685),
-#         (510, 685),
-#         (610, 685),
-#         (810, 685),
-#         (910, 685),
-#         (1110, 685),
-#         (1210, 685),
-#         (1310, 685),
-#         
+        (510, 430),
+        (610, 430),
+        (210, 515),
+        (310, 515),
+        (410, 515),
+        (510, 515),
+        (610, 515),
+        (710, 515),
+        (110, 55.5),
+        (210, 55.5),
+        (310, 55.5),
+        (510, 55.5),
+        (610, 55.5),
+        (810, 55.5),
+        (910, 55.5),
+        (1110, 55.5),
+        (1210, 55.5),
+        (1310, 55.5),
+        (110, 180),
+        (210, 180),
+        (310, 180),
+        (510, 180),
+        (610, 180),
+        (810, 180),
+        (910, 180),
+        (1110, 180),
+        (1210, 180),
+        (1310, 180),
+        (210, 265),
+        (310, 265),
+        (410, 265),
+        (510, 265),
+        (610, 265),
+        (710, 265),
+        (810, 265),
+        (910, 265),
+        (1010, 265),
+        (1110, 265),
+        (1210, 265),
+        (210, 345),
+        (310, 345),
+        (410, 345),
+        (510, 345),
+        (610, 345),
+        (710, 345),
+        (810, 345),
+        (910, 345),
+        (1210, 345),
+        (1310, 345),
+        (810, 515),
+        (910, 515),
+        (1210, 515),
+        (1310, 515),
+        (810, 430),
+        (910, 430),
+        (1010, 430),
+        (1110, 430),
+        (1210, 430),
+        (1310, 430),
+        (210, 600),
+        (310, 600),
+        (410, 600),
+        (510, 600),
+        (610, 600),
+        (710, 600),
+        (810, 600),
+        (910, 600),
+        (1010, 600),
+        (1110, 600),
+        (1210, 600),
+        (110, 685),
+        (210, 685),
+        (310, 685),
+        (510, 685),
+        (610, 685),
+        (810, 685),
+        (910, 685),
+        (1110, 685),
+        (1210, 685),
+        (1310, 685),
+        
         
     ]
     
@@ -370,29 +381,48 @@ def main() -> None:
 
             # Schermata Game Over e vittoria
             if game_over:
+                # Aggiorna e salva record
+                if LasagneMangiate > record_lasagne:
+                    record_lasagne = LasagneMangiate
+                if CaffèBevuti > record_caffe:
+                    record_caffe = CaffèBevuti
+                with open(RECORD_FILE, "w") as f:
+                    f.write(f"{record_lasagne},{record_caffe}")
+                
                 overlay = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SRCALPHA)
                 overlay.fill((0, 0, 0, 150))
                 screen.blit(overlay, (0, 0))
                 
                 go_font = pygame.font.SysFont('Impact', 100)
                 if vittoria:
-                    go_text = go_font.render("HAI VINTO!", True, "yellow")
+                    go_text = go_font.render("HAI VINTO!", True, "yellow" )
                 else:
-                    go_text = go_font.render("GAME OVER", True, "red")
+                    go_text = go_font.render("GAME OVER", True, "red" )
             
-                go_rect = go_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
+                go_rect = go_text.get_rect(center=(SCREEN_WIDTH // 2, 208))
                 screen.blit(go_text, go_rect)
                 
-                #scritta per restart
+                # Punteggi
+                stat_font = pygame.font.SysFont('Impact', 38)
+                stat_lasagne = stat_font.render(f"Lasagne mangiate: {LasagneMangiate}", True, "white" )
+                stat_caffe = stat_font.render(f"Caffe bevuti: {CaffèBevuti}", True, "white" )
+                rec_lasagne = stat_font.render(f"Record lasagne: {record_lasagne}", True, "yellow" )
+                rec_caffe = stat_font.render(f"Record caffe: {record_caffe}", True, "yellow" )
+                screen.blit(stat_lasagne, stat_lasagne.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 30)))
+                screen.blit(stat_caffe, stat_caffe.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 75)))
+                screen.blit(rec_lasagne, rec_lasagne.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 80)))
+                screen.blit(rec_caffe, rec_caffe.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 35)))
+                
+                # Scritta per restart
                 restart_font = pygame.font.SysFont('Impact', 40)
-                restart_text = restart_font.render("Premi R per ricominciare", True, "white")
-                restart_rect = restart_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 100))
+                restart_text = restart_font.render("Premi R per ricominciare", True, "white" )
+                restart_rect = restart_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 170))
                 screen.blit(restart_text, restart_rect)
                 
-                #scritta per tornare alla home
+                # Scritta per tornare alla home
                 home_font = pygame.font.SysFont('Impact', 40)
-                home_text = home_font.render("Premi F per tornare alla Home", True, "white")
-                home_rect = home_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 170))
+                home_text = home_font.render("Premi F per tornare alla Home", True, "white" )
+                home_rect = home_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 240))
                 screen.blit(home_text, home_rect)
             
             # Controllo fine boost
@@ -452,29 +482,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#         screen.blit(game_end, (100,100))
-#         screen.blit(subtitle, (100,300))
