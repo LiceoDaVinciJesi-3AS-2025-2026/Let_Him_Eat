@@ -13,7 +13,8 @@ def main() -> None:
     pygame.mixer.music.set_volume(0.5)
     pygame.mixer.music.play()
 
-
+    gameover_sound = pygame.mixer.Sound("MusicaPerdente.mp3")
+    victory_sound = pygame.mixer.Sound("victorySound.mp3")
     
     SCREEN_WIDTH = 1450
     SCREEN_HEIGHT = 800
@@ -97,87 +98,87 @@ def main() -> None:
         (210, 430),
         (310, 430),
         (410, 430),
-        (510, 430),
-        (610, 430),
-        (210, 515),
-        (310, 515),
-        (410, 515),
-        (510, 515),
-        (610, 515),
-        (710, 515),
-        (110, 55.5),
-        (210, 55.5),
-        (310, 55.5),
-        (510, 55.5),
-        (610, 55.5),
-        (810, 55.5),
-        (910, 55.5),
-        (1110, 55.5),
-        (1210, 55.5),
-        (1310, 55.5),
-        (110, 180),
-        (210, 180),
-        (310, 180),
-        (510, 180),
-        (610, 180),
-        (810, 180),
-        (910, 180),
-        (1110, 180),
-        (1210, 180),
-        (1310, 180),
-        (210, 265),
-        (310, 265),
-        (410, 265),
-        (510, 265),
-        (610, 265),
-        (710, 265),
-        (810, 265),
-        (910, 265),
-        (1010, 265),
-        (1110, 265),
-        (1210, 265),
-        (210, 345),
-        (310, 345),
-        (410, 345),
-        (510, 345),
-        (610, 345),
-        (710, 345),
-        (810, 345),
-        (910, 345),
-        (1210, 345),
-        (1310, 345),
-        (810, 515),
-        (910, 515),
-        (1210, 515),
-        (1310, 515),
-        (810, 430),
-        (910, 430),
-        (1010, 430),
-        (1110, 430),
-        (1210, 430),
-        (1310, 430),
-        (210, 600),
-        (310, 600),
-        (410, 600),
-        (510, 600),
-        (610, 600),
-        (710, 600),
-        (810, 600),
-        (910, 600),
-        (1010, 600),
-        (1110, 600),
-        (1210, 600),
-        (110, 685),
-        (210, 685),
-        (310, 685),
-        (510, 685),
-        (610, 685),
-        (810, 685),
-        (910, 685),
-        (1110, 685),
-        (1210, 685),
-        (1310, 685),
-        
+#         (510, 430),
+#         (610, 430),
+#         (210, 515),
+#         (310, 515),
+#         (410, 515),
+#         (510, 515),
+#         (610, 515),
+#         (710, 515),
+#         (110, 55.5),
+#         (210, 55.5),
+#         (310, 55.5),
+#         (510, 55.5),
+#         (610, 55.5),
+#         (810, 55.5),
+#         (910, 55.5),
+#         (1110, 55.5),
+#         (1210, 55.5),
+#         (1310, 55.5),
+#         (110, 180),
+#         (210, 180),
+#         (310, 180),
+#         (510, 180),
+#         (610, 180),
+#         (810, 180),
+#         (910, 180),
+#         (1110, 180),
+#         (1210, 180),
+#         (1310, 180),
+#         (210, 265),
+#         (310, 265),
+#         (410, 265),
+#         (510, 265),
+#         (610, 265),
+#         (710, 265),
+#         (810, 265),
+#         (910, 265),
+#         (1010, 265),
+#         (1110, 265),
+#         (1210, 265),
+#         (210, 345),
+#         (310, 345),
+#         (410, 345),
+#         (510, 345),
+#         (610, 345),
+#         (710, 345),
+#         (810, 345),
+#         (910, 345),
+#         (1210, 345),
+#         (1310, 345),
+#         (810, 515),
+#         (910, 515),
+#         (1210, 515),
+#         (1310, 515),
+#         (810, 430),
+#         (910, 430),
+#         (1010, 430),
+#         (1110, 430),
+#         (1210, 430),
+#         (1310, 430),
+#         (210, 600),
+#         (310, 600),
+#         (410, 600),
+#         (510, 600),
+#         (610, 600),
+#         (710, 600),
+#         (810, 600),
+#         (910, 600),
+#         (1010, 600),
+#         (1110, 600),
+#         (1210, 600),
+#         (110, 685),
+#         (210, 685),
+#         (310, 685),
+#         (510, 685),
+#         (610, 685),
+#         (810, 685),
+#         (910, 685),
+#         (1110, 685),
+#         (1210, 685),
+#         (1310, 685),
+#         
         
     ]
     
@@ -202,6 +203,11 @@ def main() -> None:
     running = True
     home = True 
     show_image = False
+    game_over = False
+    vittoria = False
+    
+    tempo_massimo = 60000
+    tempo_inizio = pygame.time.get_ticks()
     
     clock = pygame.time.Clock()
     
@@ -227,7 +233,7 @@ def main() -> None:
                 if home and event.key == pygame.K_RETURN:
                     home = False
                     pygame.mixer.init() 
-                    pygame.mixer.music.load("sal.mp3") 
+                    pygame.mixer.music.load("MusicaGioco.mp3") 
                     pygame.mixer.music.set_volume(0.5)
                     pygame.mixer.music.play()
 
@@ -238,10 +244,36 @@ def main() -> None:
                     playerX, playerY = 55, 38
                     enemy_x, enemy_y = 1350.0, 700.0
                     game_over = False
+                    vittoria = False 
                     lasagna = lasagna_originale.copy()
                     caffè = caffè_originale.copy()
                     LasagneMangiate = 0
                     CaffèBevuti = 0
+                    tempo_inizio = pygame.time.get_ticks()
+                    victory_sound.stop()
+                    pygame.mixer.music.stop()
+                    pygame.mixer.music.load("MusicaGioco.mp3")
+                    pygame.mixer.music.play(-1)
+                    
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_f and game_over:
+                    home = True
+                    game_over = False
+                    vittoria = False
+                    victory_sound.stop()
+                    pygame.mixer.music.stop()
+                    pygame.mixer.music.load("musicahome.mp3")
+                    pygame.mixer.music.play(-1)
+
+
+                    
+                    #reset tempo
+                    tempo_inizio = pygame.time.get_ticks()
+
+                    #riavvia musica
+                    pygame.mixer.music.stop()
+                    pygame.mixer.music.load("MusicaGioco.mp3")
+                    pygame.mixer.music.play()
         
         if event.type == ADD_CAFFE and not home:
             if len(caffè) == 0:
@@ -290,8 +322,21 @@ def main() -> None:
         # se ci troviamo nel gioco
         elif home == False :
             keys = pygame.key.get_pressed()
-
+            
+            #tempo
+            tempo_passato = pygame.time.get_ticks() - tempo_inizio
+            tempo_rimasto = tempo_massimo - tempo_passato
+            
+            if tempo_rimasto <= 0:
+                game_over = True
+                vittoria = False 
+            
             screen.blit(imgLabrinto,(0,0))
+            
+            #mostra il tempo
+            secondi = max(0, tempo_rimasto // 1000)
+            timer_text = Normalfont.render(f"Tempo: {secondi}", True, "white")
+            screen.blit(timer_text, (20,20))
             
             # Controlla se il gioco è finito o no
             if not game_over:
@@ -320,20 +365,35 @@ def main() -> None:
                 enemy_rect = pygame.Rect(enemy_x, enemy_y, enemy_size, enemy_size)
                 if player_rect.colliderect(enemy_rect):
                     game_over = True
+                    pygame.mixer.music.stop()
+                    gameover_sound.play()
 
-            # Schermata Game Over
+            # Schermata Game Over e vittoria
             if game_over:
                 overlay = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SRCALPHA)
                 overlay.fill((0, 0, 0, 150))
                 screen.blit(overlay, (0, 0))
+                
                 go_font = pygame.font.SysFont('Impact', 100)
-                go_text = go_font.render("GAME OVER", True, "red")
+                if vittoria:
+                    go_text = go_font.render("HAI VINTO!", True, "yellow")
+                else:
+                    go_text = go_font.render("GAME OVER", True, "red")
+            
                 go_rect = go_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
                 screen.blit(go_text, go_rect)
+                
+                #scritta per restart
                 restart_font = pygame.font.SysFont('Impact', 40)
                 restart_text = restart_font.render("Premi R per ricominciare", True, "white")
                 restart_rect = restart_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 100))
                 screen.blit(restart_text, restart_rect)
+                
+                #scritta per tornare alla home
+                home_font = pygame.font.SysFont('Impact', 40)
+                home_text = home_font.render("Premi F per tornare alla Home", True, "white")
+                home_rect = home_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 170))
+                screen.blit(home_text, home_rect)
             
             # Controllo fine boost
             if boost_attivo and pygame.time.get_ticks() > fine_boost:
@@ -341,36 +401,43 @@ def main() -> None:
                 boost_attivo = False          
             
             # Interazione con le lasagne
-            lasagna_rimaste = []
-            for posx, posy in lasagna:
-                en = pygame.Rect(posx, posy, 30, 30)
-                screen.blit(imgLasagna, (posx, posy))
+            if not game_over:
+                lasagna_rimaste = []
+                for posx, posy in lasagna:
+                    en = pygame.Rect(posx, posy, 30, 30)
+                    screen.blit(imgLasagna, (posx, posy))
     
-                player_rect = pygame.Rect(playerX, playerY, player_size, player_size)
-                if player_rect.colliderect(en):
-                    LasagneMangiate += 1
-                else:
-                    lasagna_rimaste.append((posx, posy))
+                    player_rect = pygame.Rect(playerX, playerY, player_size, player_size)
+                    if player_rect.colliderect(en):
+                        LasagneMangiate += 1
+                    else:
+                        lasagna_rimaste.append((posx, posy))
 
             lasagna = lasagna_rimaste
+            if len(lasagna) == 0:
+                game_over = True 
+                vittoria = True 
+                pygame.mixer.music.stop()
+                victory_sound.play()
             
             # Interazione con il caffè
-            caffè_rimasti = []
-            for posx, posy in caffè:
-                en2 = pygame.Rect(posx, posy, 30, 30)
-                screen.blit(imgCaffè, (posx, posy))
+            if not game_over:
+                caffè_rimasti = []
+                for posx, posy in caffè:
+                    en2 = pygame.Rect(posx, posy, 30, 30)
+                    screen.blit(imgCaffè, (posx, posy))
                 
-                player_rect = pygame.Rect(playerX, playerY, player_size, player_size)
-                if player_rect.colliderect(en2):
-                    CaffèBevuti += 1
-                    # Attiva boost
-                    player_speed = velocita_boost
-                    boost_attivo = True
-                    fine_boost = pygame.time.get_ticks() + 3000  # 3 secondi
-                else:
-                    caffè_rimasti.append((posx, posy))
+                    player_rect = pygame.Rect(playerX, playerY, player_size, player_size)
+                    if player_rect.colliderect(en2):
+                        CaffèBevuti += 1
+                        # Attiva boost
+                        player_speed = velocita_boost
+                        boost_attivo = True
+                        fine_boost = pygame.time.get_ticks() + 3000  # 3 secondi
+                    else:
+                        caffè_rimasti.append((posx, posy))
                 
-            caffè = caffè_rimasti
+                caffè = caffè_rimasti
             
             print(pygame.mouse.get_pos())
 
