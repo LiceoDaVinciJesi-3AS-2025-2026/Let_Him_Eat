@@ -340,7 +340,12 @@ def main() -> None:
             
             if tempo_rimasto <= 0:
                 game_over = True
-                vittoria = False 
+                vittoria = False
+                pygame.mixer.music.stop()
+                pygame.mixer.music.stop()
+                gameover_sound.play()
+                    
+
             
             screen.blit(imgLabrinto,(0,0))
             
