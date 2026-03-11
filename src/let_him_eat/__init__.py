@@ -94,9 +94,22 @@ def main() -> None:
     imgGarfieldSotto = pygame.transform.scale(imgGarfieldSotto,(player_size +4, player_size + 4))
     
     # Immagine nemico
-    imgNemico = pygame.image.load("src/let_him_eat/cane1.png")
-    imgNemico = pygame.transform.scale(imgNemico, (enemy_size, enemy_size))
     
+    imgNemicoSinistra = pygame.image.load("src/let_him_eat/caneSinistra.png")
+    imgNemicoSinistra = pygame.transform.scale(imgNemicosinistra, (enemy_size, enemy_size))
+    
+    imgNemicoDestra = pygame.image.load("src/let_him_eat/cane1.png")
+    imgNemicoDestra = pygame.transform.scale(imgNemicoDestra, (enemy_size, enemy_size))
+
+    imgNemicoUp = pygame.image.load("src/let_him_eat/caneSu.png")
+    imgNemicoUp = pygame.transform.scale(imgNemicoUp, (enemy_size, enemy_size))
+    
+
+    imgNemicoDown = pygame.image.load("src/let_him_eat/caneAvanti.png")
+    imgNemicoDown = pygame.transform.scale(imgNemicoDown, (enemy_size, enemy_size))
+    
+
+
     # Scritte
     Titlefont = pygame.font.SysFont('Impact', 70)
     Subtitlefont = pygame.font.SysFont('Impact', 30)
@@ -371,7 +384,16 @@ def main() -> None:
             # Controlla se il gioco è finito o no
             if not game_over:
                 enemy_x, enemy_y, enemy_direction = move_enemy(enemy_x, enemy_y, enemy_speed, enemy_size)
-                screen.blit(imgNemico, (enemy_x, enemy_y))
+                if enemy_direction == "dx2":
+                    screen.blit(imgNemicoDestra, (enemy_x, enemy_y))
+                elif enemy_direction == "sx2":
+                    screen.blit(imgNemicoSinistra, (enemy_x, enemy_y))
+                elif enemy_direction == "up2":
+                    screen.blit(imgNemicoUp, (enemy_x, enemy_y))
+                elif enemy_direction == "down2":
+                    screen.blit(imgNemicoDown, (enemy_x, enemy_y))
+                else:
+                    screen.blit(imgNemicoDestra, (enemy_x, enemy_y)) 
                 
                 # Movimento player
                 playerX, playerY, direction = move_player(keys, playerX, playerY, player_speed, SCREEN_WIDTH, SCREEN_HEIGHT, player_size)
