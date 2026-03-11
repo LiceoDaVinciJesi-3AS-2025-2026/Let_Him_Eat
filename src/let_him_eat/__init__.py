@@ -223,14 +223,13 @@ def main() -> None:
     show_image = False
     game_over = False
     vittoria = False
-    
-    tempo_massimo = 90000
-    tempo_inizio = pygame.time.get_ticks()
-    
+      
     clock = pygame.time.Clock()
     
     ADD_CAFFE = pygame.USEREVENT + 1
     pygame.time.set_timer(ADD_CAFFE, 5000)  # 5 secondi
+    
+    tempo_inizio = None
     
     while running:
         
@@ -250,6 +249,8 @@ def main() -> None:
                 
                 if home and event.key == pygame.K_RETURN:
                     home = False
+                    tempo_inizio = pygame.time.get_ticks()
+                    
                     pygame.mixer.init() 
                     pygame.mixer.music.load("src/let_him_eat/MusicaGioco.mp3") 
                     pygame.mixer.music.set_volume(0.5)
@@ -323,7 +324,7 @@ def main() -> None:
             textRect = textSurface.get_rect(center=buttonRect.center)
             screen.blit(textSurface, textRect)
             
-            buttonColor2 = "darkred" #CHECK ME!!!
+            buttonColor2 = "dark red" 
             if buttonRect2.collidepoint(mPos):
                 buttonColor2 = "red"
                 
@@ -342,9 +343,15 @@ def main() -> None:
             keys = pygame.key.get_pressed()
             
             # Tempo
-            tempo_passato = pygame.time.get_ticks() - tempo_inizio
+            tempo_massimo = 90000
+
+            if tempo_inizio is not None:
+                tempo_passato = pygame.time.get_ticks() - tempo_inizio
+            else:
+                tempo_passato = 0
+
             tempo_rimasto = tempo_massimo - tempo_passato
-            
+
             if tempo_rimasto <= 0:
                 game_over = True
                 vittoria = False
