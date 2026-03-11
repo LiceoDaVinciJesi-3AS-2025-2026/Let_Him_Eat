@@ -96,7 +96,7 @@ def main() -> None:
     # Immagine nemico
     
     imgNemicoSinistra = pygame.image.load("src/let_him_eat/caneSinistra.png")
-    imgNemicoSinistra = pygame.transform.scale(imgNemicosinistra, (enemy_size, enemy_size))
+    imgNemicoSinistra = pygame.transform.scale(imgNemicoSinistra, (enemy_size, enemy_size))
     
     imgNemicoDestra = pygame.image.load("src/let_him_eat/cane1.png")
     imgNemicoDestra = pygame.transform.scale(imgNemicoDestra, (enemy_size, enemy_size))
@@ -108,7 +108,6 @@ def main() -> None:
     imgNemicoDown = pygame.image.load("src/let_him_eat/caneAvanti.png")
     imgNemicoDown = pygame.transform.scale(imgNemicoDown, (enemy_size, enemy_size))
     
-
 
     # Scritte
     Titlefont = pygame.font.SysFont('Impact', 70)
