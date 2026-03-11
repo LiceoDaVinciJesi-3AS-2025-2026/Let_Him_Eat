@@ -7,7 +7,7 @@ def main() -> None:
     pygame.init()
     
     
-    #musica
+    # Musica
     pygame.mixer.init() 
     pygame.mixer.music.load("musicahome.mp3") 
     pygame.mixer.music.set_volume(0.5)
@@ -90,12 +90,12 @@ def main() -> None:
     imgNemico = pygame.image.load("cane1.png")
     imgNemico = pygame.transform.scale(imgNemico, (enemy_size, enemy_size))
     
-   # Scritte
+    # Scritte
     Titlefont = pygame.font.SysFont('Impact', 70)
     Subtitlefont = pygame.font.SysFont('Impact', 30)
     Normalfont = pygame.font.SysFont('Serif', 30)
 
-   # Pulsanti
+    # Pulsanti
     font = pygame.font.SysFont('Comic Sans MS',40)
     # Pulsante 1
     textSurface = font.render('EXIT' , True , "white") 
@@ -104,7 +104,7 @@ def main() -> None:
     textSurface2 = font.render('RULES' , True , "white") 
     buttonRect2 = pygame.Rect(SCREEN_WIDTH -1200, SCREEN_HEIGHT -400, 200, 60)
 
-   # Enità
+    # Enità
     lasagna = [
         (210, 430),
         (310, 430),
@@ -210,20 +210,20 @@ def main() -> None:
     lasagna_originale = lasagna.copy()
     caffè_originale = caffè.copy()
   
-  # Interazioni
+    # Interazioni
     running = True
     home = True 
     show_image = False
     game_over = False
     vittoria = False
     
-    tempo_massimo = 60000
+    tempo_massimo = 90000
     tempo_inizio = pygame.time.get_ticks()
     
     clock = pygame.time.Clock()
     
     ADD_CAFFE = pygame.USEREVENT + 1
-    pygame.time.set_timer(ADD_CAFFE, 5000)  # 10 secondi
+    pygame.time.set_timer(ADD_CAFFE, 5000)  # 5 secondi
     
     while running:
         
@@ -278,10 +278,10 @@ def main() -> None:
 
 
                     
-                    #reset tempo
+                    # Reset tempo
                     tempo_inizio = pygame.time.get_ticks()
 
-                    #riavvia musica
+                    # Riavvia musica
                     pygame.mixer.music.stop()
                     pygame.mixer.music.load("MusicaGioco.mp3")
                     pygame.mixer.music.play()
@@ -302,7 +302,7 @@ def main() -> None:
         
                 
                 
-        # se ci troviamo nella schermata iniziale
+        # Se ci troviamo nella schermata iniziale
         if home:
             screen.blit(imgSfondo,(0,0))
             
@@ -330,11 +330,11 @@ def main() -> None:
                     screen.blit(imgRegole, rectRegole)
             
         
-        # se ci troviamo nel gioco
+        # Se ci troviamo nel gioco
         elif home == False :
             keys = pygame.key.get_pressed()
             
-            #tempo
+            # Tempo
             tempo_passato = pygame.time.get_ticks() - tempo_inizio
             tempo_rimasto = tempo_massimo - tempo_passato
             
@@ -349,7 +349,7 @@ def main() -> None:
             
             screen.blit(imgLabrinto,(0,0))
             
-            #mostra il tempo
+            # Mostra il tempo
             secondi = max(0, tempo_rimasto // 1000)
             timer_text = Normalfont.render(f"Tempo: {secondi}", True, "white")
             screen.blit(timer_text, (20,20))
@@ -473,8 +473,6 @@ def main() -> None:
                         caffè_rimasti.append((posx, posy))
                 
                 caffè = caffè_rimasti
-            
-            print(pygame.mouse.get_pos())
 
         
         pygame.display.flip()
