@@ -68,7 +68,7 @@ def main() -> None:
     imgCaffè = pygame.transform.scale(imgCaffè, (30, 30))
     
     imgRegole = pygame.image.load("regole.jpeg")
-    imgRegole = pygame.transform.scale(imgRegole, (SCREEN_WIDTH, SCREEN_HEIGHT))
+    imgRegole = pygame.transform.scale(imgRegole, (1450, 1000))
     
     # Immagine Garfiel (ovvero il personaggio da muovere)
     imgGarfield = pygame.image.load("garfield_senza_sfondo.png")
