@@ -150,38 +150,70 @@ def move_player(keys, x, y, speed, screen_width, screen_height, player_size):
 
 
 # Funzione movimento nemici
-def move_enemy(enemy_x, enemy_y, player_x, player_y, speed, enemy_size):
+def move_enemy(keys, x, y, speed, screen_width, screen_height, player_size):
 
-    dx = player_x - enemy_x
-    dy = player_y - enemy_y
+   
+    direction = None
+   # Movimento X
+    newX = x
+    if keys[pygame.K_LEFT] and x > 0:
+        newX -= speed
+        direction = "sx2"
+    if keys[pygame.K_RIGHT] and x < screen_width - player_size:
+        newX += speed
+        direction = "dx2"
+    
+    if check_collision(pygame.Rect(newX, y, player_size, player_size)):
+        newX = x
+    
+    x = newX
+    
+    # Movimento Y
+    newY = y
+    if keys[pygame.K_UP] and y > 0:
+        newY -= speed
+        direction = "up2"
+    if keys[pygame.K_DOWN] and y < screen_height - player_size:
+        newY += speed
+        direction = "down2"
+    
+    if check_collision(pygame.Rect(x, newY, player_size, player_size)):
+        newY = y
+    
+    y = newY
+        
+    return x, y, direction
 
-    # decide direzione principale
-    if abs(dx) > abs(dy):
-
-        step = speed if dx > 0 else -speed
-        new_x = enemy_x + step
-
-        if not check_collision(pygame.Rect(int(new_x), int(enemy_y), enemy_size, enemy_size)):
-            enemy_x = new_x
-        else:
-            step = speed if dy > 0 else -speed
-            new_y = enemy_y + step
-
-            if not check_collision(pygame.Rect(int(enemy_x), int(new_y), enemy_size, enemy_size)):
-                enemy_y = new_y
-
-    else:
-
-        step = speed if dy > 0 else -speed
-        new_y = enemy_y + step
-
-        if not check_collision(pygame.Rect(int(enemy_x), int(new_y), enemy_size, enemy_size)):
-            enemy_y = new_y
-        else:
-            step = speed if dx > 0 else -speed
-            new_x = enemy_x + step
-
-            if not check_collision(pygame.Rect(int(new_x), int(enemy_y), enemy_size, enemy_size)):
-                enemy_x = new_x
-
-    return enemy_x, enemy_y
+#     dx = player_x - enemy_x
+#     dy = player_y - enemy_y
+# 
+#     # decide direzione principale
+#     if abs(dx) > abs(dy):
+# 
+#         step = speed if dx > 0 else -speed
+#         new_x = enemy_x + step
+# 
+#         if not check_collision(pygame.Rect(int(new_x), int(enemy_y), enemy_size, enemy_size)):
+#             enemy_x = new_x
+#         else:
+#             step = speed if dy > 0 else -speed
+#             new_y = enemy_y + step
+# 
+#             if not check_collision(pygame.Rect(int(enemy_x), int(new_y), enemy_size, enemy_size)):
+#                 enemy_y = new_y
+# 
+#     else:
+# 
+#         step = speed if dy > 0 else -speed
+#         new_y = enemy_y + step
+# 
+#         if not check_collision(pygame.Rect(int(enemy_x), int(new_y), enemy_size, enemy_size)):
+#             enemy_y = new_y
+#         else:
+#             step = speed if dx > 0 else -speed
+#             new_x = enemy_x + step
+# 
+#             if not check_collision(pygame.Rect(int(new_x), int(enemy_y), enemy_size, enemy_size)):
+#                 enemy_x = new_x
+# 
+#     return enemy_x, enemy_y

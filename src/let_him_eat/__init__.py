@@ -389,6 +389,25 @@ def main() -> None:
                     
                 else:
                     screen.blit(imgGarfield, (playerX, playerY))
+                 
+                # Movimento player
+                playerX, playerY, direction = move_player(keys, playerX, playerY, player_speed, SCREEN_WIDTH, SCREEN_HEIGHT, player_size)
+                if direction == "dx2":
+                    screen.blit(imgGarfieldDestra, (playerX, playerY))
+                
+                elif direction == "sx2":
+                    screen.blit(imgGarfieldSinistra, (playerX, playerY))
+                
+                elif direction == "up2":
+                    screen.blit(imgGarfieldSopra, (playerX, playerY))
+                
+                elif direction == "down2":
+                    screen.blit(imgGarfieldSotto, (playerX, playerY))
+                    
+                else:
+                    screen.blit(imgGarfield, (playerX, playerY))
+
+
 
                 # Controllo collisione nemico-player
                 player_rect = pygame.Rect(playerX, playerY, player_size, player_size)
