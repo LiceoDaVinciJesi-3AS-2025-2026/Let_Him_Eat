@@ -1,6 +1,12 @@
-import pygame
-from Paolo import move_player, move_enemy
+# Moduli Standard
 import random
+
+# Moduli PyPi
+import pygame
+from platformdirs import PlatformDirs
+
+# Moduli Interni
+from let_him_eat.Paolo import move_player, move_enemy
 
 def main() -> None:
     
@@ -9,12 +15,12 @@ def main() -> None:
     
     #musica
     pygame.mixer.init() 
-    pygame.mixer.music.load("musicahome.mp3") 
+    pygame.mixer.music.load("src/let_him_eat/musicahome.mp3") 
     pygame.mixer.music.set_volume(0.5)
     pygame.mixer.music.play()
 
-    gameover_sound = pygame.mixer.Sound("MusicaPerdente.mp3")
-    victory_sound = pygame.mixer.Sound("victorySound.mp3")
+    gameover_sound = pygame.mixer.Sound("src/let_him_eat/MusicaPerdente.mp3")
+    victory_sound = pygame.mixer.Sound("src/let_him_eat/victorySound.mp3")
     
     SCREEN_WIDTH = 1450
     SCREEN_HEIGHT = 800
@@ -44,7 +50,8 @@ def main() -> None:
     game_over = False
     
     # RECORD (caricato da file)
-    RECORD_FILE = "record.txt"
+    dirs = PlatformDirs("let_him_eat", ensure_exists=True)
+    RECORD_FILE = dirs.user_data_dir + "/record.txt"
     try:
         with open(RECORD_FILE, "r") as f:
             dati = f.read().split(",")
@@ -55,39 +62,39 @@ def main() -> None:
         record_caffe = 0
     
     # Immagini
-    imgSfondo = pygame.image.load("schermataHome.png") 
+    imgSfondo = pygame.image.load("src/let_him_eat/schermataHome.png") 
     imgSfondo = pygame.transform.scale(imgSfondo,(SCREEN_WIDTH, SCREEN_HEIGHT))
      
-    imgLabrinto = pygame.image.load("eastward_pacman_marble_v2.png")
+    imgLabrinto = pygame.image.load("src/let_him_eat/eastward_pacman_marble_v2.png")
     imgLabrinto = pygame.transform.scale(imgLabrinto, (SCREEN_WIDTH, SCREEN_HEIGHT))
     
-    imgLasagna = pygame.image.load("lasagna_pixel.png")
+    imgLasagna = pygame.image.load("src/let_him_eat/lasagna_pixel.png")
     imgLasagna = pygame.transform.scale(imgLasagna, (30, 30))
     
-    imgCaffè = pygame.image.load("caffe.png")
+    imgCaffè = pygame.image.load("src/let_him_eat/caffe.png")
     imgCaffè = pygame.transform.scale(imgCaffè, (30, 30))
     
-    imgRegole = pygame.image.load("regole.jpeg")
+    imgRegole = pygame.image.load("src/let_him_eat/regole.jpeg")
     imgRegole = pygame.transform.scale(imgRegole, (1450, 1000))
     
     # Immagine Garfiel (ovvero il personaggio da muovere)
-    imgGarfield = pygame.image.load("garfield_senza_sfondo.png")
+    imgGarfield = pygame.image.load("src/let_him_eat/garfield_senza_sfondo.png")
     imgGarfield = pygame.transform.scale(imgGarfield,(player_size, player_size))
    
-    imgGarfieldDestra = pygame.image.load("garfieldAvanti.png")
+    imgGarfieldDestra = pygame.image.load("src/let_him_eat/garfieldAvanti.png")
     imgGarfieldDestra = pygame.transform.scale(imgGarfieldDestra,(player_size + 2, player_size + 2))
     
-    imgGarfieldSinistra = pygame.image.load("garfieldsinistra.png")
+    imgGarfieldSinistra = pygame.image.load("src/let_him_eat/garfieldsinistra.png")
     imgGarfieldSinistra = pygame.transform.scale(imgGarfieldSinistra,(player_size + 2, player_size + 2))
     
-    imgGarfieldSopra = pygame.image.load("garfieldsopra.png")
+    imgGarfieldSopra = pygame.image.load("src/let_him_eat/garfieldsopra.png")
     imgGarfieldSopra = pygame.transform.scale(imgGarfieldSopra,(player_size +4, player_size + 4))
   
-    imgGarfieldSotto = pygame.image.load("garfieldSotto.png")
+    imgGarfieldSotto = pygame.image.load("src/let_him_eat/garfieldSotto.png")
     imgGarfieldSotto = pygame.transform.scale(imgGarfieldSotto,(player_size +4, player_size + 4))
     
     # Immagine nemico
-    imgNemico = pygame.image.load("cane1.png")
+    imgNemico = pygame.image.load("src/let_him_eat/cane1.png")
     imgNemico = pygame.transform.scale(imgNemico, (enemy_size, enemy_size))
     
    # Scritte
@@ -244,7 +251,7 @@ def main() -> None:
                 if home and event.key == pygame.K_RETURN:
                     home = False
                     pygame.mixer.init() 
-                    pygame.mixer.music.load("MusicaGioco.mp3") 
+                    pygame.mixer.music.load("src/let_him_eat/MusicaGioco.mp3") 
                     pygame.mixer.music.set_volume(0.5)
                     pygame.mixer.music.play()
 
@@ -263,7 +270,7 @@ def main() -> None:
                     tempo_inizio = pygame.time.get_ticks()
                     victory_sound.stop()
                     pygame.mixer.music.stop()
-                    pygame.mixer.music.load("MusicaGioco.mp3")
+                    pygame.mixer.music.load("src/let_him_eat/MusicaGioco.mp3")
                     pygame.mixer.music.play(-1)
                     
             if event.type == pygame.KEYDOWN:
@@ -273,7 +280,7 @@ def main() -> None:
                     vittoria = False
                     victory_sound.stop()
                     pygame.mixer.music.stop()
-                    pygame.mixer.music.load("musicahome.mp3")
+                    pygame.mixer.music.load("src/let_him_eat/musicahome.mp3")
                     pygame.mixer.music.play(-1)
 
 
@@ -283,7 +290,7 @@ def main() -> None:
 
                     #riavvia musica
                     pygame.mixer.music.stop()
-                    pygame.mixer.music.load("MusicaGioco.mp3")
+                    pygame.mixer.music.load("src/let_him_eat/MusicaGioco.mp3")
                     pygame.mixer.music.play()
         
         if event.type == ADD_CAFFE and not home:
@@ -316,7 +323,7 @@ def main() -> None:
             textRect = textSurface.get_rect(center=buttonRect.center)
             screen.blit(textSurface, textRect)
             
-            buttonColor2 = "darkred"
+            buttonColor2 = "darkred" #CHECK ME!!!
             if buttonRect2.collidepoint(mPos):
                 buttonColor2 = "red"
                 
