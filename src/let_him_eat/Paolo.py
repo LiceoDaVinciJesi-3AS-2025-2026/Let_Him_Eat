@@ -1,5 +1,6 @@
 # Funzioni
 
+# Moduli Standard
 import pygame
 
 # Walls
