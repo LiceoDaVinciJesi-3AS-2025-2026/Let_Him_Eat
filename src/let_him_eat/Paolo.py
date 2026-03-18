@@ -3,10 +3,9 @@
 # Moduli Standard
 import pygame
 
-# Walls
+# =========================================================================================================================================
 
-# pygame.Rect(x, y, larghezza, altezza) # Allora la larghezza dei blocchi doppi(4x4) è 79 circa (controllare sempre), l'altezza dei blocchi doppi è 76
-                                        # Mentre dei blocchi 1(larghezza)x2(altezza) la larghezza è 32, e l'altezza 76
+# Walls
 WALLS = [
     # Muri laterali
     pygame.Rect(0, 0, 1450, 34), # Muro sopra
@@ -14,7 +13,7 @@ WALLS = [
     pygame.Rect(41, 755, 1410, 34), # Muro sotto
     pygame.Rect(1408, 42, 41, 755), # Muro destra
     
-    # Settore 1, in base alla foto labirinto_separato. Inizio da in alto a sinistra andando verso destra
+    # Settore 1, inizio dall'alto a sinistra andando verso destra
     pygame.Rect(110, 83, 77, 76),
     pygame.Rect(260, 83, 79, 76),
     pygame.Rect(409, 42, 31, 76),
