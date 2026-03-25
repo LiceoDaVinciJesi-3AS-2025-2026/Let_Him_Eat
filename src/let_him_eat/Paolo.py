@@ -1,4 +1,15 @@
-# Funzioni
+# File Funzioni - è il file dove sono presenti le funzioni.
+
+# In questo file ci sono le funzioni: controllo colissione muri, controllo movimento player e controllo movimento nemico
+
+# License: See LICENSE file in the project root for details.
+
+# Authors: 
+# Paolo Vannucci <email: paolo.vannucci2009@gmail.com>
+# Andrea Cittadini <email: Andreacittadini7@gamil.com>
+# Dmytro Ihnatiuk <email: >
+
+# =========================================================================================================================================ì
 
 # Moduli Standard
 import pygame

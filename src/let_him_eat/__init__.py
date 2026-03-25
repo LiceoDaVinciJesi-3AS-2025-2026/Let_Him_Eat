@@ -7,7 +7,10 @@
 
 # License: See LICENSE file in the project root for details.
 
-
+# Authors: 
+# Paolo Vannucci <email: paolo.vannucci2009@gmail.com>
+# Andrea Cittadini <email: Andreacittadini7@gamil.com>
+# Dmytro Ihnatiuk <email: >
 
 # =========================================================================================================================================
 
