@@ -13,23 +13,4 @@ Riuscirai a mangiare tutte le lasagne e vincere… o verrai catturato prima?
 Let Him Eat è un mix di strategia, riflessi e adrenalina: semplice da giocare, difficile da padroneggiare.
 
 
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-!\[Screenshot del gioco](fotogioco.png)
-
-
-=======
 ![](fotogioco.png)
->>>>>>> 0a83cc27b0d2ac0251cc0d478702bdff7f29d250
-=======
-![](fotogioco.png)
->>>>>>> 0a83cc27b0d2ac0251cc0d478702bdff7f29d250
-=======
-![](fotogioco.png)
->>>>>>> 0a83cc27b0d2ac0251cc0d478702bdff7f29d250
-=======
-![](fotogioco.png)
->>>>>>> 0a83cc27b0d2ac0251cc0d478702bdff7f29d250
