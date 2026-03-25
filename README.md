@@ -15,4 +15,16 @@ Let Him Eat è un mix di strategia, riflessi e adrenalina: semplice da giocare, 
 
 ![](fotogioco.png)
 
-<hr> ciao
+<hr>
+
+Paolo ha fatto l'Initial commit.
+Andrea ha creato il progetto.
+Paolo ha aggiunto l'immagine dello sfondo.
+Paolo, Andrea e Dmytro hanno lavorato sul codice. Creazione pulsanti, scritte, muri.
+Paolo ha creato la funzione movimento player con il supporto dell' I.A.
+Paolo, Andrea aggiunto immagini.
+Andrea ha aggiunto la musica.
+Paolo ha creato la funzione movimento nemico con il supporto dell' I.A.
+Paolo ha aggiunto il file record.
+Andrea ha aggiunto altre immagine.
+Andrea ha aggiunto le immagini del nemico.
