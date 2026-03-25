@@ -14,5 +14,4 @@ Let Him Eat è un mix di strategia, riflessi e adrenalina: semplice da giocare, 
 
 
 
-!\[Screenshot del gioco](fotogioco.png)
-
+![](fotogioco.png)
