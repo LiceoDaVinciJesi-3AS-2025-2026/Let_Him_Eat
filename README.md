@@ -1,4 +1,5 @@
-# Let_Him_Eat
+# Let\_Him\_Eat
+
 🍝 Let Him Eat – Il gioco dove la fame è una missione! ☕
 
 Preparati a entrare in un labirinto pieno di insidie nei panni del mitico Garfield!
@@ -10,3 +11,8 @@ Per sopravvivere dovrai muoverti con astuzia tra i corridoi, evitare i muri e sf
 Riuscirai a mangiare tutte le lasagne e vincere… o verrai catturato prima?
 
 Let Him Eat è un mix di strategia, riflessi e adrenalina: semplice da giocare, difficile da padroneggiare.
+
+!\[Screenshot del gioco](fotogioco.png)
+
+
+
