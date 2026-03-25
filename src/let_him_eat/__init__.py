@@ -1,4 +1,15 @@
-# File Main
+# File Main - è il file prinicipale del gioco, dove il gioco inizia e finisce.
+
+# In questo file si danno i valori iniziali del player e del nemico (velocità, grandezza, boost e dove si trovano a inizio gioco), si implementano le musiche,
+# le immagini e si scrive il file record (contiene il record realizzato nella sessione di gioco). Contiene le scritte e i pulasnti presenti nella home e nel
+# gioco. Controlla le verie interazione presenti nelle varie schermate (home, gioco e schermata della morte), ovvero l'interazioni con i muri, le lasagne, il
+# caffè e il nemico. 
+
+# License: See LICENSE file in the project root for details.
+
+
+
+# =========================================================================================================================================
 
 # Moduli Standard
 import random
